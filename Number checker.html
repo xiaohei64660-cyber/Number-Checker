@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Number Checker</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    input, button { padding: 8px; margin: 5px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+  </style>
+</head>
+<body>
+  <h1>Number Checker</h1>
+  <input type="text" id="search" placeholder="Search by number..." />
+  <button onclick="searchData()">Search</button>
+
+  <table id="results"></table>
+
+  <script>
+    async function searchData() {
+      const query = document.getElementById('search').value;
+      const apiUrl = 'https://sheetdb.io/api/v1/https://sheetdb.io/api/v1/86uf4yovojfyy/search?number=' + query;
+
+      const res = await fetch(apiUrl);
+      const data = await res.json();
+
+      const table = document.getElementById('results');
+      table.innerHTML = '<tr><th>Number</th><th>Chatter</th></tr>';
+
+      data.forEach(row => {
+        table.innerHTML += `
+          <tr>
+            <td>${row.Number}</td>
+            <td>${row.Chatter}</td>
+          </tr>`;
+      });
+    }
+  </script>
+</body>
+</html>
